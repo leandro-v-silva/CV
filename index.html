@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leandro Vieira Silva - CV</title>
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #E2E2E2; }
-        .container { display: flex; flex-direction: column; height: 100%; }
+        .container { display: flex; flex-direction: column; height: 100%; width: 100vw; }
         header { background: #001F5A; color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 10; }
         header h1 { margin: 0; font-size: 1.1rem; font-weight: 500; letter-spacing: 0.5px; }
         .actions-right { display: flex; align-items: center; gap: 16px; }
@@ -15,25 +15,27 @@
         .lang-btn.active { background: #F3890B; color: white; }
         header a.download-btn { color: #FFFFFF; background: #0039AC; border: 1px solid rgba(255,255,255,0.4); text-decoration: none; font-weight: bold; padding: 6px 16px; border-radius: 4px; transition: background 0.2s; font-size: 0.9rem; }
         header a.download-btn:hover { background: #002d87; }
-        .pdf-container { flex-grow: 1; width: 100%; height: calc(100vh - 50px); position: relative; }
-        iframe { width: 100%; height: 100%; border: none; }
+        
+        /* Ajuste estrito para forçar largura total ocupando 100% do espaço visível */
+        .pdf-container { flex-grow: 1; width: 100%; height: calc(100vh - 50px); overflow: hidden; display: flex; justify-content: center; }
+        iframe { width: 100%; height: 100%; border: none; display: block; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1 id="page-title">Leandro Vieira Silva — Analytics Engineer / DW / BI</h1>
+            <h1 id="page-title">Leandro Vieira Silva — DW / BI Developer | Analytics Engineer</h1>
             <div class="actions-right">
                 <div class="lang-switch">
-                    <button class="lang-btn active" onclick="switchLanguage('pt')">PT</button>
-                    <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+                    <button id="btn-pt" class="lang-btn" onclick="switchLanguage('pt')">PT</button>
+                    <button id="btn-en" class="lang-btn active" onclick="switchLanguage('en')">EN</button>
                 </div>
-                <a id="download-link" href="resume_pt.pdf" download="Leandro_Vieira_Silva_CV_PT.pdf" class="download-btn">Baixar PDF</a>
+                <a id="download-link" href="resume_en.pdf" download="Leandro_Vieira_Silva_CV_EN.pdf" class="download-btn">Download PDF</a>
             </div>
         </header>
         <div class="pdf-container">
-            <!-- FitW forces Full Width zoom inside the viewer engine -->
-            <iframe id="pdf-viewer" src="resume_pt.pdf#view=FitW&pagemode=none" type="application/pdf"></iframe>
+            <!-- Mudamos os parâmetros de zoom nativos do motor Chromium para forçar largura máxima e ocultar miniaturas -->
+            <iframe id="pdf-viewer" src="resume_en.pdf#view=FitW&pagemode=none&zoom=100" type="application/pdf"></iframe>
         </div>
     </div>
 
@@ -42,23 +44,23 @@
             const viewer = document.getElementById('pdf-viewer');
             const downloadLink = document.getElementById('download-link');
             const title = document.getElementById('page-title');
-            const buttons = document.querySelectorAll('.lang-btn');
+            const btnPt = document.getElementById('btn-pt');
+            const btnEn = document.getElementById('btn-en');
             
-            // Remove active status from all buttons
-            buttons.forEach(btn => btn.classList.remove('active'));
+            btnPt.classList.remove('active');
+            btnEn.classList.remove('active');
             
             if (lang === 'pt') {
-                event.target.classList.add('active');
-                viewer.src = "resume_pt.pdf#view=FitW&pagemode=none";
+                btnPt.classList.add('active');
+                // Força o reset do src injetando os parâmetros ideais de visualização
+                viewer.src = "resume_pt.pdf#view=FitW&pagemode=none&zoom=100";
                 downloadLink.href = "resume_pt.pdf";
                 downloadLink.download = "Leandro_Vieira_Silva_CV_PT.pdf";
                 downloadLink.innerText = "Baixar PDF";
                 title.innerText = "Leandro Vieira Silva — Analytics Engineer / DW / BI";
             } else {
-                // If clicked directly or passed via event
-                const targetBtn = Array.from(buttons).find(btn => btn.innerText === 'EN');
-                targetBtn.classList.add('active');
-                viewer.src = "resume_en.pdf#view=FitW&pagemode=none";
+                btnEn.classList.add('active');
+                viewer.src = "resume_en.pdf#view=FitW&pagemode=none&zoom=100";
                 downloadLink.href = "resume_en.pdf";
                 downloadLink.download = "Leandro_Vieira_Silva_CV_EN.pdf";
                 downloadLink.innerText = "Download PDF";
