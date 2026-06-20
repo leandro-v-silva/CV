@@ -1,20 +1,29 @@
-
-
-
-    
-    
-    Leandro Vieira Silva - CV
-    
-
-
-    
-        
-            Leandro Vieira Silva — Analytics Engineer / DW / BI
-            Baixar PDF
-        
-        
-            
-        
-    
-
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leandro Vieira Silva - CV</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #E2E2E2; }
+        .container { display: flex; flex-direction: column; height: 100%; }
+        header { background: #001F5A; color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 10; }
+        header h1 { margin: 0; font-size: 1.1rem; font-weight: 500; letter-spacing: 0.5px; }
+        header a { color: #FFFFFF; background: #F3890B; text-decoration: none; font-weight: bold; padding: 6px 16px; border-radius: 4px; transition: background 0.2s; font-size: 0.9rem; }
+        header a:hover { background: #d47607; }
+        .pdf-container { flex-grow: 1; width: 100%; height: calc(100vh - 50px); position: relative; }
+        iframe { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Leandro Vieira Silva — Analytics Engineer / DW / BI</h1>
+            <a href="resume.pdf" download="Leandro_Vieira_Silva_CV.pdf">Baixar PDF</a>
+        </header>
+        <div class="pdf-container">
+            <iframe src="resume.pdf#view=FitH" type="application/pdf"></iframe>
+        </div>
+    </div>
+</body>
+</html>
