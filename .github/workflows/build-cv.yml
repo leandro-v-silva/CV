@@ -24,7 +24,6 @@ jobs:
           working_directory: tex
           compiler: pdflatex
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
-          extra_system_packages: "texlive-fonts-extra"
 
       - name: Compile Portuguese resume
         uses: xu-cheng/latex-action@v3
@@ -33,7 +32,6 @@ jobs:
           working_directory: tex
           compiler: pdflatex
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
-          extra_system_packages: "texlive-fonts-extra"
 
       - name: Move compiled PDFs to repo root
         run: |
