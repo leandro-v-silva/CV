@@ -22,7 +22,6 @@ jobs:
         with:
           root_file: resume_en.tex
           working_directory: tex
-          compiler: pdflatex
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
 
       - name: Compile Portuguese resume
@@ -30,7 +29,6 @@ jobs:
         with:
           root_file: resume_pt.tex
           working_directory: tex
-          compiler: pdflatex
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
 
       - name: Move compiled PDFs to repo root
