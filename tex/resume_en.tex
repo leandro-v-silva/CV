@@ -1,0 +1,167 @@
+%%%%%%%%%%%%%%%%%
+% Enhanced CV using altacv.cls
+%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+\PassOptionsToPackage{dvipsnames}{xcolor}
+
+\newenvironment{sloppypar*}{\sloppy\ignorespaces}{\par}
+\geometry{left=1.2cm, right=1.2cm, top=1cm, bottom=1cm, columnsep=0.75cm}
+
+\ifxetexorluatex
+  \setmainfont{Roboto Slab}
+  \setsansfont{Lato}
+  \renewcommand{\familydefault}{\sfdefault}
+\else
+  \usepackage[rm]{roboto}
+  \usepackage[defaultsans]{lato}
+  \renewcommand{\familydefault}{\sfdefault}
+\fi
+
+\definecolor{PrimaryColor}{HTML}{001F5A}
+\definecolor{SecondaryColor}{HTML}{0039AC}
+\definecolor{ThirdColor}{HTML}{F3890B}
+\definecolor{BodyColor}{HTML}{666666}
+\definecolor{EmphasisColor}{HTML}{2E2E2E}
+\definecolor{BackgroundColor}{HTML}{E2E2E2}
+
+\colorlet{name}{PrimaryColor}
+\colorlet{tagline}{SecondaryColor}
+\colorlet{heading}{PrimaryColor}
+\colorlet{headingrule}{ThirdColor}
+\colorlet{subheading}{SecondaryColor}
+\colorlet{accent}{SecondaryColor}
+\colorlet{emphasis}{EmphasisColor}
+\colorlet{body}{BodyColor}
+\pagecolor{BackgroundColor}
+
+\renewcommand{\namefont}{\Huge\rmfamily\bfseries}
+\renewcommand{\personalinfofont}{\small\bfseries}
+\renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
+\renewcommand{\cvsubsectionfont}{\large\bfseries}
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+\begin{document}
+\name{Leandro Vieira Silva}
+\tagline{Seeking: DW/BI Developer \quad|\quad Analytics Engineer}
+
+\personalinfo{
+  \email{leandro797.ls@gmail.com}\smallskip
+  \phone{+55‑11‑97897 0961}\smallskip
+  \location{São Paulo, Brazil}\smallskip\\
+  \linkedin{leandro-vieira-silva-analytics}
+}
+
+\makecvheader
+
+\begin{paracol}{}
+
+%==== RIGHT COLUMN ====
+\switchcolumn
+
+\cvsection{About Me}
+\begin{quote}
+Production Engineer with solid experience in Business Intelligence, data modeling, and dashboard development. Currently pursuing an MBA in Business Intelligence, Digital Marketing, and Data‑Driven Decision Making.
+
+I've worked in national and multinational organizations since 2017. My strengths include designing ETL pipelines, building dimensional models (Star Schema, Snowflake), and developing KPIs and dashboards using Power BI, SQL, SSAS (Tabular), and DAX. I'm also familiar with cloud platforms (Azure, AWS, GCP) and Agile (Scrum) methodologies.
+
+Nowadays, I integrate my analytics skills with Claude AI.
+\end{quote}
+
+\cvsection{Experience}
+
+\cvevent{Senior Analytics Developer / Tabular Developer}{Cinpal}{Nov 2025 – present}{São Paulo, Brazil}
+\begin{itemize}
+  \item Designed and implemented BI solutions using DAX measures and dimensional models for OLAP systems (PBI, Tabular).
+  \item Ensured data quality and consistency by validating ETL pipelines and migrations.
+  \item Managed and maintained Power BI datasets, including access control and bug fixes.
+  \item Advanced data modeling development applying best practices.
+\end{itemize}
+\textbf{Tools:} Fabric, ADF, SQL, Tabular Editor CLI, Python, Git, Power BI, PowerShell
+
+
+\cvevent{Senior Power BI / Tabular Developer}{Keyrus}{Oct 2023 – Apr 2025}{São Paulo, Brazil}
+\begin{itemize}
+  \item Designed and implemented BI solutions using DAX measures and dimensional models for OLAP systems.
+  \item Ensured data quality and consistency by validating ETL pipelines and migrations.
+  \item Managed and maintained Power BI datasets, including access control and bug fixes.
+\end{itemize}  
+\textbf{Tools:} Azure, AWS, Azure Warehouse, SQL, Tabular Editor, Python, Git, Power BI
+%\divider
+
+\cvevent{Senior Power BI Developer}{Tata Consultancy Services}{Oct 2023 – Apr 2024}{Barueri‑SP, Brazil}
+\begin{itemize}
+  \item Developed BI dashboards for internal stakeholders.
+  \item Validated data migrations (Denodo $\rightarrow$ Athena) and built OLAP models.
+  \item Created DAX measures and maintained dataset integrity.
+\end{itemize}
+%\divider
+\textbf{Tools:} Azure, AWS, Azure Warehouse, SQL, Databricks, Python, Git, Power BI
+
+\cvevent{Senior BI Consultant (Freelance)}{Self‑Employed}{Mar 2023 – Jan 2024 \& May 2020 – Nov 2021}{São Paulo‑SP, Brazil}
+\begin{itemize}
+  \item Developed BI and cost-monitoring dashboards for R\&D and construction projects.
+  \item Designed data warehouses and ETL pipelines; collaborated with UX teams to deliver storytelling dashboards.
+\end{itemize}
+%\divider
+\textbf{Tools:} Azure, AWS, GCP, Data Factory, Dataverse, Power Apps, Databricks, Power BI, Excel, BigQuery, Google Sheets
+
+\cvevent{BI Coordinator}{Cheil}{Jul 2022 – Mar 2023}{São Paulo‑SP, Brazil}
+\begin{itemize}
+  \item Built marketing dashboards using GA4 and Power BI.
+  \item Automated data integration using Supermetrics API and Google Sheets.
+\end{itemize}
+%\divider
+\textbf{Tools:} GCP, SQL, GA4, Adobe Analytics, Power BI
+
+\cvevent{BI Specialist}{Tecnisa S/A}{Nov 2021 – Nov 2022}{São Paulo‑SP, Brazil}
+\begin{itemize}
+  \item Created ETL routines using Power Query and dimensional models for reporting.
+  \item Retrieved data via SQL, APIs, and web scraping; optimized models with DAX Studio and Tabular Editor.
+\end{itemize}
+%\divider
+\textbf{Tools:} Azure, Synapse, Azure SQL, Python, Power BI, Excel, Data Lake
+
+\cvevent{Data Analyst}{Kroton}{Oct 2017 – Dec 2019}{Valinhos‑SP, Brazil}
+\begin{itemize}
+  \item Built dashboards and models using Power Query, Power Pivot, and DAX.
+  \item Managed academic data flows and acted as Scrum Master in Agile teams.
+\end{itemize}
+%\divider
+\textbf{Tools:} Azure, SQL, Power BI, Excel, Python (Pandas, Matplotlib)
+
+\cvevent{Maintenance Planner / Engineer}{Mahle Metal Leve}{Feb 2013 – Jan 2016}{Queimados‑RJ, Brazil}
+\begin{itemize}
+  \item Planned and scheduled maintenance using Gantt charts, PERT/CPM, and TPM.
+  \item Tracked MTBF and MTTR to enhance operational efficiency.
+\end{itemize}
+
+\cvsection{Education}
+\cvevent{MBA in BI \& Marketing}{PUCRS}{Jan 2023 – Present}{Online}
+%\divider
+\cvevent{B.Sc. in Production Engineering}{USF}{Mar 2007 – Dec 2013}{Campinas‑SP, Brazil}
+%\divider
+\cvevent{Math Studies}{UNIVESP}{Aug 2025 – Present}{São Paulo‑SP, Brazil}
+
+
+%==== LEFT COLUMN ====
+\cvsection{Tech Stack}
+\begin{sloppypar*}
+\cvtags{Power\,BI/true, DAX/true, Power\,Query (M)/true, SQL/true, Python/true, Databricks/true, Snowflake/true, Git/true, CI‑CD/true, ETL‑ELT/true, Claude/true, Docker/true, Fabric/true, Tabular CLI/true, shell/true, Powershell/true, N8N/true}
+\end{sloppypar*}
+
+\cvsection{Courses}
+\begin{sloppypar*}
+\cvtags{Data Analyst with Python, Data Engineering with SQL, DA‑100, Data Modeling, Data Literacy}
+\end{sloppypar*}
+
+\cvsection{Languages}
+\cvlang{Portuguese}{Native}\\
+%\divider
+\cvlang{English}{Advanced}\\
+%\divider
+\cvlang{French}{Basic}
+
+\end{paracol}
+\end{document}

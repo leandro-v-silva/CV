@@ -1,0 +1,167 @@
+%%%%%%%%%%%%%%%%%
+% Currículo aprimorado usando altacv.cls
+%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+\PassOptionsToPackage{dvipsnames}{xcolor}
+
+\newenvironment{sloppypar*}{\sloppy\ignorespaces}{\par}
+\geometry{left=1.2cm, right=1.2cm, top=1cm, bottom=1cm, columnsep=0.75cm}
+
+\ifxetexorluatex
+  \setmainfont{Roboto Slab}
+  \setsansfont{Lato}
+  \renewcommand{\familydefault}{\sfdefault}
+\else
+  \usepackage[rm]{roboto}
+  \usepackage[defaultsans]{lato}
+  \renewcommand{\familydefault}{\sfdefault}
+\fi
+
+\definecolor{PrimaryColor}{HTML}{001F5A}
+\definecolor{SecondaryColor}{HTML}{0039AC}
+\definecolor{ThirdColor}{HTML}{F3890B}
+\definecolor{BodyColor}{HTML}{666666}
+\definecolor{EmphasisColor}{HTML}{2E2E2E}
+\definecolor{BackgroundColor}{HTML}{E2E2E2}
+
+\colorlet{name}{PrimaryColor}
+\colorlet{tagline}{SecondaryColor}
+\colorlet{heading}{PrimaryColor}
+\colorlet{headingrule}{ThirdColor}
+\colorlet{subheading}{SecondaryColor}
+\colorlet{accent}{SecondaryColor}
+\colorlet{emphasis}{EmphasisColor}
+\colorlet{body}{BodyColor}
+\pagecolor{BackgroundColor}
+
+\renewcommand{\namefont}{\Huge\rmfamily\bfseries}
+\renewcommand{\personalinfofont}{\small\bfseries}
+\renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
+\renewcommand{\cvsubsectionfont}{\large\bfseries}
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+\begin{document}
+\name{Leandro Vieira Silva}
+\tagline{Buscando: Desenvolvedor DW/BI \quad|\quad Analytics Engineer}
+
+\personalinfo{
+  \email{leandro797.ls@gmail.com}\smallskip
+  \phone{+55‑11‑97897 0961}\smallskip
+  \location{São Paulo, Brasil}\smallskip\\
+  \linkedin{leandro-vieira-silva-analytics}
+}
+
+\makecvheader
+
+\begin{paracol}{}
+
+%==== COLUNA DIREITA ====
+\switchcolumn
+
+\cvsection{Sobre Mim}
+\begin{quote}
+Engenheiro de Produção com sólida experiência em Business Intelligence, modelagem de dados e desenvolvimento de dashboards. Atualmente cursando MBA em Business Intelligence, Marketing Digital e Tomada de Decisão Orientada a Dados.
+
+Atuo em organizações nacionais e multinacionais desde 2017. Meus pontos fortes incluem o desenho de pipelines de ETL, a construção de modelos dimensionais (Star Schema, Snowflake) e o desenvolvimento de KPIs e dashboards usando Power BI, SQL, SSAS (Tabular) e DAX. Também tenho familiaridade com plataformas em nuvem (Azure, AWS, GCP) e metodologias ágeis (Scrum).
+
+Atualmente, integro minhas habilidades de analytics ao Claude AI.
+\end{quote}
+
+\cvsection{Experiência}
+
+\cvevent{Desenvolvedor Sênior de Analytics / Tabular Developer}{Cinpal}{Nov 2025 – atual}{São Paulo, Brasil}
+\begin{itemize}
+  \item Desenhou e implementou soluções de BI usando medidas DAX e modelos dimensionais para sistemas OLAP (PBI, Tabular).
+  \item Garantiu a qualidade e a consistência dos dados validando pipelines de ETL e migrações.
+  \item Gerenciou e manteve datasets do Power BI, incluindo controle de acesso e correção de bugs.
+  \item Desenvolvimento avançado de modelagem de dados aplicando boas práticas.
+\end{itemize}
+\textbf{Ferramentas:} Fabric, ADF, SQL, Tabular Editor CLI, Python, Git, Power BI, PowerShell
+
+
+\cvevent{Desenvolvedor Sênior Power BI / Tabular}{Keyrus}{Out 2023 – Abr 2025}{São Paulo, Brasil}
+\begin{itemize}
+  \item Desenhou e implementou soluções de BI usando medidas DAX e modelos dimensionais para sistemas OLAP.
+  \item Garantiu a qualidade e a consistência dos dados validando pipelines de ETL e migrações.
+  \item Gerenciou e manteve datasets do Power BI, incluindo controle de acesso e correção de bugs.
+\end{itemize}  
+\textbf{Ferramentas:} Azure, AWS, Azure Warehouse, SQL, Tabular Editor, Python, Git, Power BI
+%\divider
+
+\cvevent{Desenvolvedor Sênior Power BI}{Tata Consultancy Services}{Out 2023 – Abr 2024}{Barueri‑SP, Brasil}
+\begin{itemize}
+  \item Desenvolveu dashboards de BI para stakeholders internos.
+  \item Validou migrações de dados (Denodo $\rightarrow$ Athena) e construiu modelos OLAP.
+  \item Criou medidas DAX e manteve a integridade dos datasets.
+\end{itemize}
+%\divider
+\textbf{Ferramentas:} Azure, AWS, Azure Warehouse, SQL, Databricks, Python, Git, Power BI
+
+\cvevent{Consultor Sênior de BI (Freelance)}{Autônomo}{Mar 2023 – Jan 2024 \& Mai 2020 – Nov 2021}{São Paulo‑SP, Brasil}
+\begin{itemize}
+  \item Desenvolveu dashboards de BI e monitoramento de custos para projetos de P\&D e construção civil.
+  \item Desenhou data warehouses e pipelines de ETL; colaborou com equipes de UX para entregar dashboards de storytelling.
+\end{itemize}
+%\divider
+\textbf{Ferramentas:} Azure, AWS, GCP, Data Factory, Dataverse, Power Apps, Databricks, Power BI, Excel, BigQuery, Google Sheets
+
+\cvevent{Coordenador de BI}{Cheil}{Jul 2022 – Mar 2023}{São Paulo‑SP, Brasil}
+\begin{itemize}
+  \item Construiu dashboards de marketing usando GA4 e Power BI.
+  \item Automatizou a integração de dados usando a API do Supermetrics e Google Sheets.
+\end{itemize}
+%\divider
+\textbf{Ferramentas:} GCP, SQL, GA4, Adobe Analytics, Power BI
+
+\cvevent{Especialista em BI}{Tecnisa S/A}{Nov 2021 – Nov 2022}{São Paulo‑SP, Brasil}
+\begin{itemize}
+  \item Criou rotinas de ETL usando Power Query e modelos dimensionais para relatórios.
+  \item Extraiu dados via SQL, APIs e web scraping; otimizou modelos com DAX Studio e Tabular Editor.
+\end{itemize}
+%\divider
+\textbf{Ferramentas:} Azure, Synapse, Azure SQL, Python, Power BI, Excel, Data Lake
+
+\cvevent{Analista de Dados}{Kroton}{Out 2017 – Dez 2019}{Valinhos‑SP, Brasil}
+\begin{itemize}
+  \item Construiu dashboards e modelos usando Power Query, Power Pivot e DAX.
+  \item Gerenciou fluxos de dados acadêmicos e atuou como Scrum Master em times ágeis.
+\end{itemize}
+%\divider
+\textbf{Ferramentas:} Azure, SQL, Power BI, Excel, Python (Pandas, Matplotlib)
+
+\cvevent{Planejador de Manutenção / Engenheiro}{Mahle Metal Leve}{Fev 2013 – Jan 2016}{Queimados‑RJ, Brasil}
+\begin{itemize}
+  \item Planejou e programou manutenções usando gráficos de Gantt, PERT/CPM e TPM.
+  \item Acompanhou MTBF e MTTR para melhorar a eficiência operacional.
+\end{itemize}
+
+\cvsection{Formação}
+\cvevent{MBA em BI \& Marketing}{PUCRS}{Jan 2023 – Presente}{Online}
+%\divider
+\cvevent{Bacharelado em Engenharia de Produção}{USF}{Mar 2007 – Dez 2013}{Campinas‑SP, Brasil}
+%\divider
+\cvevent{Estudos em Matemática}{UNIVESP}{Ago 2025 – Presente}{São Paulo‑SP, Brasil}
+
+
+%==== COLUNA ESQUERDA ====
+\cvsection{Tecnologias}
+\begin{sloppypar*}
+\cvtags{Power\,BI/true, DAX/true, Power\,Query (M)/true, SQL/true, Python/true, Databricks/true, Snowflake/true, Git/true, CI‑CD/true, ETL‑ELT/true, Claude/true, Docker/true, Fabric/true, Tabular CLI/true, shell/true, Powershell/true, N8N/true}
+\end{sloppypar*}
+
+\cvsection{Cursos}
+\begin{sloppypar*}
+\cvtags{Data Analyst with Python, Data Engineering with SQL, DA‑100, Data Modeling, Data Literacy}
+\end{sloppypar*}
+
+\cvsection{Idiomas}
+\cvlang{Português}{Nativo}\\
+%\divider
+\cvlang{Inglês}{Avançado}\\
+%\divider
+\cvlang{Francês}{Básico}
+
+\end{paracol}
+\end{document}

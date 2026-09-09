@@ -1,0 +1,47 @@
+name: Build CV PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tex/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Compile English resume
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume_en.tex
+          working_directory: tex
+          compiler: pdflatex
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+          extra_system_packages: "texlive-fonts-extra"
+
+      - name: Compile Portuguese resume
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume_pt.tex
+          working_directory: tex
+          compiler: pdflatex
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+          extra_system_packages: "texlive-fonts-extra"
+
+      - name: Move compiled PDFs to repo root
+        run: |
+          mv tex/resume_en.pdf resume_en.pdf
+          mv tex/resume_pt.pdf resume_pt.pdf
+
+      - name: Commit updated PDFs
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-build resume PDFs from LaTeX source"
+          file_pattern: "resume_en.pdf resume_pt.pdf"
