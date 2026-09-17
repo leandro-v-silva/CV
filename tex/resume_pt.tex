@@ -4,11 +4,26 @@
 
 \documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
 \PassOptionsToPackage{dvipsnames}{xcolor}
+\usepackage{paracol}
+\usepackage{xstring}
 
 \newenvironment{sloppypar*}{\sloppy\ignorespaces}{\par}
 \geometry{left=1.2cm, right=1.2cm, top=1cm, bottom=1cm, columnsep=0.75cm}
 
-\ifxetexorluatex
+% Render a comma-separated list of tags (optionally "text/true") as \cvtag pills
+\newcommand{\cvtags}[1]{%
+  \foreach \tagitem in {#1} {%
+    \IfSubStr{\tagitem}{/}%
+      {\StrBefore{\tagitem}{/}[\tagname]}%
+      {\def\tagname{\tagitem}}%
+    \cvtag{\tagname}\ %
+  }%
+}
+
+% Render a language name and proficiency level
+\newcommand{\cvlang}[2]{\textbf{#1:} #2}
+
+\iftutex
   \setmainfont{Roboto Slab}
   \setsansfont{Lato}
   \renewcommand{\familydefault}{\sfdefault}
@@ -55,7 +70,8 @@
 
 \makecvheader
 
-\begin{paracol}{}
+\columnratio{0.35}
+\begin{paracol}{2}
 
 %==== COLUNA DIREITA ====
 \switchcolumn
@@ -146,6 +162,7 @@ Atualmente, integro minhas habilidades de analytics ao Claude AI.
 
 
 %==== COLUNA ESQUERDA ====
+\switchcolumn
 \cvsection{Tecnologias}
 \begin{sloppypar*}
 \cvtags{Power\,BI/true, DAX/true, Power\,Query (M)/true, SQL/true, Python/true, Databricks/true, Snowflake/true, Git/true, CI‑CD/true, ETL‑ELT/true, Claude/true, Docker/true, Fabric/true, Tabular CLI/true, shell/true, Powershell/true, N8N/true}
