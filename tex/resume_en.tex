@@ -4,11 +4,10 @@
 
 \documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
 \PassOptionsToPackage{dvipsnames}{xcolor}
-\usepackage{paracol}
 \usepackage{xstring}
 
 \newenvironment{sloppypar*}{\sloppy\ignorespaces}{\par}
-\geometry{left=1.2cm, right=1.2cm, top=1cm, bottom=1cm, columnsep=0.75cm}
+\geometry{left=1.2cm, right=1.2cm, top=1cm, bottom=1cm}
 
 % Render a comma-separated list of tags (optionally "text/true") as \cvtag pills
 \newcommand{\cvtags}[1]{%
@@ -69,12 +68,6 @@
 }
 
 \makecvheader
-
-\columnratio{0.35}
-\begin{paracol}{2}
-
-%==== RIGHT COLUMN ====
-\switchcolumn
 
 \cvsection{About Me}
 \begin{quote}
@@ -161,8 +154,6 @@ Nowadays, I integrate my analytics skills with Claude AI.
 \cvevent{Math Studies}{UNIVESP}{Aug 2025 – Present}{São Paulo‑SP, Brazil}
 
 
-%==== LEFT COLUMN ====
-\switchcolumn
 \cvsection{Tech Stack}
 \begin{sloppypar*}
 \cvtags{Power\,BI/true, DAX/true, Power\,Query (M)/true, SQL/true, Python/true, Databricks/true, Snowflake/true, Git/true, CI‑CD/true, ETL‑ELT/true, Claude/true, Docker/true, Fabric/true, Tabular CLI/true, shell/true, Powershell/true, N8N/true}
@@ -180,5 +171,4 @@ Nowadays, I integrate my analytics skills with Claude AI.
 %\divider
 \cvlang{French}{Basic}
 
-\end{paracol}
 \end{document}
