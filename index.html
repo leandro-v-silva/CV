@@ -5,67 +5,329 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leandro Vieira Silva - CV</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #E2E2E2; }
-        .container { display: flex; flex-direction: column; height: 100%; width: 100vw; }
-        header { background: #001F5A; color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 10; }
-        header h1 { margin: 0; font-size: 1.1rem; font-weight: 500; letter-spacing: 0.5px; }
-        .actions-right { display: flex; align-items: center; gap: 16px; }
-        .lang-switch { display: flex; background: #0039AC; padding: 2px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); }
-        .lang-btn { background: none; border: none; color: rgba(255,255,255,0.6); padding: 6px 12px; font-weight: bold; cursor: pointer; border-radius: 3px; font-size: 0.85rem; transition: all 0.2s; }
-        .lang-btn.active { background: #F3890B; color: white; }
-        header a.download-btn { color: #FFFFFF; background: #0039AC; border: 1px solid rgba(255,255,255,0.4); text-decoration: none; font-weight: bold; padding: 6px 16px; border-radius: 4px; transition: background 0.2s; font-size: 0.9rem; }
-        header a.download-btn:hover { background: #002d87; }
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #2980b9;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
+        header p.title { font-size: 1.2rem; opacity: 0.9; margin-bottom: 1.5rem; }
         
-        /* Ajuste estrito para forçar largura total ocupando 100% do espaço visível */
-        .pdf-container { flex-grow: 1; width: 100%; height: calc(100vh - 50px); overflow: hidden; display: flex; justify-content: center; }
-        iframe { width: 100%; height: 100%; border: none; display: block; }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .contact-links a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .contact-links a:hover { color: #3498db; }
+        .contact-links svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* Language Toggle */
+        .lang-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 0.3rem;
+        }
+        .lang-toggle button {
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            border-radius: 15px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .lang-toggle button.active {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 800px;
+            margin: -2rem auto 3rem;
+            padding: 0 1.5rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+        .job, .school { margin-bottom: 1.5rem; }
+        .job:last-child, .school:last-child { margin-bottom: 0; }
+        .job-header, .school-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        .job-title, .school-name { font-weight: 700; font-size: 1.1rem; color: var(--primary-color); }
+        .company, .degree { color: var(--accent-color); font-weight: 500; }
+        .date { font-size: 0.9rem; color: #666; font-style: italic; }
+        
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .skill-tag {
+            background: #e8f4f8;
+            color: var(--primary-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Download Section */
+        .download-section {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 0.5rem;
+            transition: background 0.3s;
+        }
+        .btn:hover { background-color: #1f6391; }
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+        .btn-outline:hover { background-color: var(--accent-color); color: white; }
+
+        /* Language Visibility */
+        [data-lang] { display: none; }
+        [data-lang].active { display: block; }
+        
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .job-header, .school-header { flex-direction: column; }
+            .contact-links { flex-direction: column; gap: 1rem; align-items: center; }
+            .lang-toggle { position: static; margin-bottom: 1rem; display: flex; justify-content: center; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1 id="page-title">Leandro Vieira Silva — DW / BI Developer | Analytics Engineer</h1>
-            <div class="actions-right">
-                <div class="lang-switch">
-                    <button id="btn-pt" class="lang-btn" onclick="switchLanguage('pt')">PT</button>
-                    <button id="btn-en" class="lang-btn active" onclick="switchLanguage('en')">EN</button>
-                </div>
-                <a id="download-link" href="resume_en.pdf" download="Leandro_Vieira_Silva_CV_EN.pdf" class="download-btn">Download PDF</a>
-            </div>
-        </header>
-        <div class="pdf-container">
-            <!-- Mudamos os parâmetros de zoom nativos do motor Chromium para forçar largura máxima e ocultar miniaturas -->
-            <iframe id="pdf-viewer" src="resume_en.pdf#view=FitW&pagemode=none&zoom=100" type="application/pdf"></iframe>
+
+    <header>
+        <div class="lang-toggle">
+            <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
+            <button onclick="setLang('pt')" id="btn-pt">PT</button>
         </div>
-    </div>
+
+        <!-- ENGLISH HEADER -->
+        <div data-lang="en" class="active">
+            <h1>Leandro Vieira Silva</h1>
+            <p class="title">Geoprocessing Specialist & Analytics Professional</p>
+            <div class="contact-links">
+                <a href="mailto:leandro797.ls@gmail.com">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    leandro797.ls@gmail.com
+                </a>
+                <a href="https://linkedin.com/in/leandro-vieira-silva-analytics" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/leandro-v-silva" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+
+        <!-- PORTUGUESE HEADER -->
+        <div data-lang="pt">
+            <h1>Leandro Vieira Silva</h1>
+            <p class="title">Especialista em Geoprocessamento & Profissional de Analytics</p>
+            <div class="contact-links">
+                <a href="mailto:leandro797.ls@gmail.com">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    leandro797.ls@gmail.com
+                </a>
+                <a href="https://linkedin.com/in/leandro-vieira-silva-analytics" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/leandro-v-silva" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ENGLISH CONTENT -->
+        <div data-lang="en" class="active">
+            <div class="card">
+                <h2>About Me</h2>
+                <p>[Copy your professional summary from resume_en.tex and paste it here. Keep it to 2-3 sentences.]</p>
+            </div>
+
+            <div class="card">
+                <h2>Experience</h2>
+                <div class="job">
+                    <div class="job-header">
+                        <span class="job-title">Job Title</span>
+                        <span class="date">Month Year – Present</span>
+                    </div>
+                    <div class="company">Company Name</div>
+                    <p>[Add 1-2 bullet points or a short paragraph about your achievements here.]</p>
+                </div>
+                <!-- Copy and paste the .job block above for more experiences -->
+            </div>
+
+            <div class="card">
+                <h2>Education</h2>
+                <div class="school">
+                    <div class="school-header">
+                        <span class="school-name">Geoprocessing Specialization</span>
+                        <span class="date">Year – Year</span>
+                    </div>
+                    <div class="degree">SENAC</div>
+                </div>
+                <div class="school">
+                    <div class="school-header">
+                        <span class="school-name">Your Bachelor's Degree</span>
+                        <span class="date">Year – Year</span>
+                    </div>
+                    <div class="degree">University Name</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <span class="skill-tag">Geoprocessing</span>
+                    <span class="skill-tag">Data Analytics</span>
+                    <span class="skill-tag">LaTeX</span>
+                    <span class="skill-tag">Git / GitHub</span>
+                    <!-- Add more skills as needed -->
+                </div>
+            </div>
+        </div>
+
+        <!-- PORTUGUESE CONTENT -->
+        <div data-lang="pt">
+            <div class="card">
+                <h2>Sobre Mim</h2>
+                <p>[Copie seu resumo profissional do resume_pt.tex e cole aqui.]</p>
+            </div>
+
+            <div class="card">
+                <h2>Experiência</h2>
+                <div class="job">
+                    <div class="job-header">
+                        <span class="job-title">Cargo</span>
+                        <span class="date">Mês Ano – Presente</span>
+                    </div>
+                    <div class="company">Nome da Empresa</div>
+                    <p>[Adicione 1-2 pontos sobre suas conquistas aqui.]</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Educação</h2>
+                <div class="school">
+                    <div class="school-header">
+                        <span class="school-name">Especialização em Geoprocessamento</span>
+                        <span class="date">Ano – Ano</span>
+                    </div>
+                    <div class="degree">SENAC</div>
+                </div>
+                <div class="school">
+                    <div class="school-header">
+                        <span class="school-name">Seu Curso de Graduação</span>
+                        <span class="date">Ano – Ano</span>
+                    </div>
+                    <div class="degree">Nome da Universidade</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Habilidades</h2>
+                <div class="skills-grid">
+                    <span class="skill-tag">Geoprocessamento</span>
+                    <span class="skill-tag">Análise de Dados</span>
+                    <span class="skill-tag">LaTeX</span>
+                    <span class="skill-tag">Git / GitHub</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DOWNLOAD SECTION (Visible in both languages) -->
+        <div class="download-section">
+            <p style="margin-bottom: 1rem; color: #666;">Want the printable version?</p>
+            <a href="resume_en.pdf" class="btn" download>📄 Download PDF (EN)</a>
+            <a href="resume_pt.pdf" class="btn btn-outline" download>📄 Baixar PDF (PT)</a>
+        </div>
+    </main>
 
     <script>
-        function switchLanguage(lang) {
-            const viewer = document.getElementById('pdf-viewer');
-            const downloadLink = document.getElementById('download-link');
-            const title = document.getElementById('page-title');
-            const btnPt = document.getElementById('btn-pt');
-            const btnEn = document.getElementById('btn-en');
-            
-            btnPt.classList.remove('active');
-            btnEn.classList.remove('active');
-            
-            if (lang === 'pt') {
-                btnPt.classList.add('active');
-                // Força o reset do src injetando os parâmetros ideais de visualização
-                viewer.src = "resume_pt.pdf#view=FitW&pagemode=none&zoom=100";
-                downloadLink.href = "resume_pt.pdf";
-                downloadLink.download = "Leandro_Vieira_Silva_CV_PT.pdf";
-                downloadLink.innerText = "Baixar PDF";
-                title.innerText = "Leandro Vieira Silva — Analytics Engineer / DW / BI";
-            } else {
-                btnEn.classList.add('active');
-                viewer.src = "resume_en.pdf#view=FitW&pagemode=none&zoom=100";
-                downloadLink.href = "resume_en.pdf";
-                downloadLink.download = "Leandro_Vieira_Silva_CV_EN.pdf";
-                downloadLink.innerText = "Download PDF";
-                title.innerText = "Leandro Vieira Silva — DW / BI Developer | Analytics Engineer";
-            }
+        function setLang(lang) {
+            // Hide all language elements
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Show selected language elements
+            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
+                el.classList.add('active');
+            });
+            // Update button states
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+            // Update HTML lang attribute for accessibility
+            document.documentElement.lang = lang;
         }
     </script>
 </body>
