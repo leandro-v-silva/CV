@@ -4,514 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leandro Vieira Silva - CV</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #001F5A;
-            --secondary: #0039AC;
-            --accent: #F3890B;
-            --bg-light: #F4F6F8;
-            --text-dark: #2E2E2E;
-            --text-light: #666666;
-            --white: #FFFFFF;
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --bg: #f4f7f6;
+            --text: #333;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* Layout */
-        .container {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            max-width: 1100px;
-            margin: 2rem auto;
-            background: var(--white);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        /* Sidebar (Dark) */
-        .sidebar {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 2.5rem 2rem;
-        }
-        .sidebar h3 {
-            font-family: 'Roboto Slab', serif;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            margin-top: 2rem;
-        }
-        .sidebar h3:first-child { margin-top: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
         
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 0.8rem;
-            font-size: 0.95rem;
-            word-break: break-all;
-        }
-        .contact-item a { color: var(--white); text-decoration: none; transition: color 0.3s; }
-        .contact-item a:hover { color: var(--accent); }
-        .contact-item svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+        .container { max-width: 800px; margin: 2rem auto; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); overflow: hidden; }
+        
+        .header { background: var(--primary); color: white; padding: 2rem; text-align: center; }
+        .header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .header p { font-size: 1.2rem; opacity: 0.9; }
+        
+        .lang-toggle { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
+        .lang-btn { background: rgba(255,255,255,0.2); border: 2px solid transparent; color: white; padding: 0.5rem 1.5rem; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.3s; }
+        .lang-btn.active { background: white; color: var(--primary); border-color: white; }
+        .lang-btn:hover { background: rgba(255,255,255,0.3); }
 
-        .skill-tag {
-            display: inline-block;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: var(--white);
-            padding: 0.3rem 0.7rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            margin: 0 0.4rem 0.6rem 0;
-        }
-
-        .edu-item, .lang-item { margin-bottom: 1rem; }
-        .edu-degree { font-weight: 700; font-size: 0.95rem; }
-        .edu-school { font-size: 0.9rem; opacity: 0.9; }
-        .edu-date { font-size: 0.8rem; opacity: 0.7; font-style: italic; }
-
-        /* Main Content */
-        .main-content {
-            padding: 3rem;
-        }
-        .lang-toggle {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--bg-light);
-            border-radius: 20px;
-            padding: 0.3rem;
-            display: flex;
-        }
-        .lang-toggle button {
-            background: transparent;
-            border: none;
-            color: var(--text-light);
-            padding: 0.4rem 1rem;
-            cursor: pointer;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-        .lang-toggle button.active {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .header-name {
-            font-family: 'Roboto Slab', serif;
-            font-size: 2.8rem;
-            color: var(--primary);
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-        }
-        .header-tagline {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            font-weight: 400;
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-family: 'Roboto Slab', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            border-bottom: 3px solid var(--accent);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-            margin-top: 2.5rem;
-        }
-        .section-title:first-of-type { margin-top: 0; }
-
-        .about-text {
-            font-size: 1.05rem;
-            color: var(--text-dark);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .job-item { margin-bottom: 2rem; }
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            margin-bottom: 0.5rem;
-        }
-        .job-title { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); }
-        .job-company { font-size: 1.15rem; font-weight: 700; color: var(--secondary); }
-        .job-date { font-size: 0.9rem; color: var(--text-light); font-style: italic; }
-        .job-location { font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.8rem; }
-        .job-item ul {
-            margin-left: 1.2rem;
-            margin-bottom: 0.8rem;
-        }
-        .job-item li { margin-bottom: 0.4rem; color: var(--text-dark); }
-        .job-tools {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            font-weight: 600;
-        }
-
-        .download-section {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #eee;
-            text-align: center;
-        }
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 700;
-            margin: 0 0.5rem;
-            transition: background 0.3s;
-        }
-        .btn:hover { background-color: var(--secondary); }
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-        .btn-outline:hover { background-color: var(--primary); color: var(--white); }
-
-        /* Language Visibility */
+        .content { padding: 2rem; }
+        .section { margin-bottom: 2rem; }
+        .section h2 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 1.4rem; }
+        
+        .pdf-container { text-align: center; margin: 2rem 0; }
+        .download-btn { display: inline-block; background: var(--accent); color: white; text-decoration: none; padding: 1rem 2rem; border-radius: 8px; font-weight: bold; font-size: 1.1rem; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3); }
+        .download-btn:hover { transform: translateY(-2px); background: #2980b9; }
+        
+        .pdf-embed { width: 100%; height: 600px; border: 1px solid #ddd; border-radius: 8px; margin-top: 1rem; }
+        
+        /* Language visibility logic */
         [data-lang] { display: none; }
         [data-lang].active { display: block; }
 
-        /* Mobile Responsive */
-        @media (max-width: 850px) {
-            .container { grid-template-columns: 1fr; margin: 0; border-radius: 0; }
-            .sidebar { padding: 2rem 1.5rem; }
-            .main-content { padding: 2rem 1.5rem; }
-            .header-name { font-size: 2.2rem; }
-            .lang-toggle { position: static; margin-bottom: 1.5rem; justify-content: center; }
-            .job-header { flex-direction: column; }
+        /* 📱 MOBILE FIX: Stack layout and handle PDFs safely */
+        @media (max-width: 600px) {
+            .container { margin: 0; border-radius: 0; }
+            .header h1 { font-size: 2rem; }
+            .content { padding: 1.5rem; }
+            .pdf-embed { display: none; /* Hide broken iframe on mobile */ }
+            .mobile-hint { display: block; background: #fff3cd; color: #856404; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-size: 0.95rem; }
+        }
+        @media (min-width: 601px) {
+            .mobile-hint { display: none; } /* Hide hint on desktop */
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <!-- EN Sidebar -->
-            <div data-lang="en" class="active">
-                <h3>Contact</h3>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <a href="mailto:leandro797.ls@gmail.com">leandro797.ls@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                    <span>+55 11 97897 0961</span>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <span>São Paulo, Brazil</span>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    <a href="https://linkedin.com/in/leandro-vieira-silva-analytics" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    <a href="https://github.com/leandro-v-silva" target="_blank">GitHub</a>
-                </div>
-
-                <h3>Tech Stack</h3>
-                <div>
-                    <span class="skill-tag">Power BI</span>
-                    <span class="skill-tag">DAX</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Databricks</span>
-                    <span class="skill-tag">Snowflake</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">CI/CD</span>
-                    <span class="skill-tag">ETL/ELT</span>
-                    <span class="skill-tag">Claude / LLM</span>
-                    <span class="skill-tag">RAG</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Fabric</span>
-                    <span class="skill-tag">n8n</span>
-                </div>
-
-                <h3>Education</h3>
-                <div class="edu-item">
-                    <div class="edu-degree">Postgrad. Geoprocessing</div>
-                    <div class="edu-school">SENAC</div>
-                    <div class="edu-date">Aug 2026 – Present</div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-degree">B.Sc. Production Engineering</div>
-                    <div class="edu-school">USF</div>
-                    <div class="edu-date">2007 – 2013</div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-degree">Math Studies</div>
-                    <div class="edu-school">UNIVESP</div>
-                    <div class="edu-date">Aug 2025 – Present</div>
-                </div>
-
-                <h3>Languages</h3>
-                <div class="lang-item">Portuguese: Native</div>
-                <div class="lang-item">English: Advanced</div>
-                <div class="lang-item">French: Basic</div>
-            </div>
-
-            <!-- PT Sidebar -->
-            <div data-lang="pt">
-                <h3>Contato</h3>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <a href="mailto:leandro797.ls@gmail.com">leandro797.ls@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                    <span>+55 11 97897 0961</span>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <span>São Paulo, Brasil</span>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    <a href="https://linkedin.com/in/leandro-vieira-silva-analytics" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    <a href="https://github.com/leandro-v-silva" target="_blank">GitHub</a>
-                </div>
-
-                <h3>Tecnologias</h3>
-                <div>
-                    <span class="skill-tag">Power BI</span>
-                    <span class="skill-tag">DAX</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Databricks</span>
-                    <span class="skill-tag">Snowflake</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">CI/CD</span>
-                    <span class="skill-tag">ETL/ELT</span>
-                    <span class="skill-tag">Claude / LLM</span>
-                    <span class="skill-tag">RAG</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Fabric</span>
-                    <span class="skill-tag">n8n</span>
-                </div>
-
-                <h3>Formação</h3>
-                <div class="edu-item">
-                    <div class="edu-degree">Especialização em Geoprocessamento</div>
-                    <div class="edu-school">SENAC</div>
-                    <div class="edu-date">Ago 2026 – Presente</div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-degree">Engenharia de Produção</div>
-                    <div class="edu-school">USF</div>
-                    <div class="edu-date">2007 – 2013</div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-degree">Estudos em Matemática</div>
-                    <div class="edu-school">UNIVESP</div>
-                    <div class="edu-date">Ago 2025 – Presente</div>
-                </div>
-
-                <h3>Idiomas</h3>
-                <div class="lang-item">Português: Nativo</div>
-                <div class="lang-item">Inglês: Avançado</div>
-                <div class="lang-item">Francês: Básico</div>
-            </div>
-        </aside>
-
-        <!-- MAIN CONTENT -->
-        <main class="main-content">
-            <div class="lang-toggle">
-                <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
-                <button onclick="setLang('pt')" id="btn-pt">PT</button>
-            </div>
-
-            <!-- ENGLISH MAIN -->
-            <div data-lang="en" class="active">
-                <h1 class="header-name">Leandro Vieira Silva</h1>
-                <p class="header-tagline">Seeking: DW/BI Developer | Analytics Engineer</p>
-
-                <h2 class="section-title">About Me</h2>
-                <p class="about-text">Production Engineer with solid experience in Business Intelligence, data modeling, and dashboard development. Currently pursuing a Postgraduate Specialization in Geoprocessing.</p>
-                <p class="about-text">I've worked in national and multinational organizations since 2017. My strengths include designing ETL pipelines, building dimensional models (Star Schema, Snowflake), and developing KPIs and dashboards using Power BI, SQL, SSAS (Tabular), and DAX. I'm also familiar with cloud platforms (Azure, AWS, GCP) and Agile (Scrum) methodologies.</p>
-                <p class="about-text">Nowadays, I integrate my analytics skills with Claude AI, LLM (closed model and open model) via prompt and API.</p>
-
-                <h2 class="section-title">Experience</h2>
-                
-                <div class="job-item">
-                    <div class="job-header">
-                        <span class="job-title">Senior Analytics Developer / Tabular Developer</span>
-                        <span class="job-date">Nov 2025 – present</span>
-                    </div>
-                    <div class="job-company">Cinpal</div>
-                    <div class="job-location">São Paulo, Brazil</div>
-                    <ul>
-                        <li>Design and implement BI solutions using DAX measures and dimensional models for OLAP systems (PBI, Tabular).</li>
-                        <li>Ensure data quality and consistency by validating ETL pipelines and migrations.</li>
-                        <li>Manage and maintain Power BI datasets, including access control and bug fixes.</li>
-                        <li>Advance data modeling practices by applying industry best practices.</li>
-                    </ul>
-                    <div class="job-tools">Tools: Fabric, ADF, SQL, Tabular Editor CLI, Python, Git, Power BI, PowerShell, LLM</div>
-                </div>
-
-                <div class="job-item">
-                    <div class="job-header">
-                        <span class="job-title">Senior Power BI / Tabular Developer</span>
-                        <span class="job-date">Oct 2023 – Apr 2025</span>
-                    </div>
-                    <div class="job-company">Keyrus</div>
-                    <div class="job-location">São Paulo, Brazil</div>
-                    <ul>
-                        <li>Designed and implemented BI solutions using DAX measures and dimensional models for OLAP systems.</li>
-                        <li>Ensured data quality and consistency by validating ETL pipelines and migrations.</li>
-                        <li>Managed and maintained Power BI datasets, including access control and bug fixes.</li>
-                    </ul>
-                    <div class="job-tools">Tools: Azure, AWS, Azure Warehouse, SQL, Tabular Editor, Python, Git, Power BI</div>
-                </div>
-
-                <div class="job-item">
-                    <div class="job-header">
-                        <span class="job-title">Senior Power BI Developer</span>
-                        <span class="job-date">Oct 2023 – Apr 2024</span>
-                    </div>
-                    <div class="job-company">Tata Consultancy Services</div>
-                    <div class="job-location">Barueri-SP, Brazil</div>
-                    <ul>
-                        <li>Developed BI dashboards for internal stakeholders.</li>
-                        <li>Validated data migrations (Denodo → Athena) and built OLAP models.</li>
-                        <li>Created DAX measures and maintained dataset integrity.</li>
-                    </ul>
-                    <div class="job-tools">Tools: Azure, AWS, SQL, Databricks, Python, Git, Power BI</div>
-                </div>
-
-                <div class="job-item">
-                    <div class="job-header">
-                        <span class="job-title">Senior BI Consultant (Freelance)</span>
-                        <span class="job-date">Mar 2023 – Jan 2024 & May 2020 – Nov 2021</span>
-                    </div>
-                    <div class="job-company">Self-Employed</div>
-                    <div class="job-location">São Paulo-SP, Brazil</div>
-                    <ul>
-                        <li>Developed BI and cost-monitoring dashboards for R&D and construction projects.</li>
-                        <li>Designed data warehouses and ETL pipelines; collaborated with UX teams to deliver storytelling dashboards.</li>
-                    </ul>
-                    <div class="job-tools">Tools: Azure, AWS, GCP, Data Factory, Power Apps, Databricks, Power BI, BigQuery</div>
-                </div>
-            </div>
-
-            <!-- PORTUGUESE MAIN -->
-            <div data-lang="pt">
-                <h1 class="header-name">Leandro Vieira Silva</h1>
-                <p class="header-tagline">Buscando: Desenvolvedor DW/BI | Analytics Engineer</p>
-
-                <h2 class="section-title">Sobre Mim</h2>
-                <p class="about-text">Engenheiro de Produção com sólida experiência em Business Intelligence, modelagem de dados e desenvolvimento de dashboards. Atualmente cursando Especialização em Geoprocessamento.</p>
-                <p class="about-text">Atuo em organizações nacionais e multinacionais desde 2017. Meus pontos fortes incluem o desenho de pipelines de ETL, a construção de modelos dimensionais (Star Schema, Snowflake) e o desenvolvimento de KPIs e dashboards usando Power BI, SQL, SSAS (Tabular) e DAX. Também tenho familiaridade com plataformas em nuvem (Azure, AWS, GCP) e metodologias ágeis (Scrum).</p>
-                <p class="about-text">Atualmente, integro minhas habilidades de analytics ao Claude AI, LLM (modelos proprietários e modelos abertos) via prompt e API.</p>
-
-                <h2 class="section-title">Experiência</h2>
-                
-                <div class="job-item">
-                    <div class="job-header">
-                        <span class="job-title">Desenvolvedor Sênior de Analytics / Tabular Developer</span>
-                        <span class="job-date">Nov 2025 – atual</span>
-                    </div>
-                    <div class="job-company">Cinpal</div>
-                    <div class="job-location">São Paulo, Brasil</div>
-                    <ul>
-                        <li>Desenho e implemento soluções de BI usando medidas DAX e modelos dimensionais para sistemas OLAP (PBI, Tabular).</li>
-                        <li>Garanto a qualidade e a consistência dos dados validando pipelines de ETL e migrações.</li>
-                        <li>Gerencio e mantenho datasets do Power BI, incluindo controle de acesso e correção de bugs.</li>
-                        <li>Avanço na modelagem de dados aplicando boas práticas.</li>
-                    </ul>
-                    <div class="job-tools">Ferramentas: Fabric, ADF, SQL, Tabular Editor CLI, Python, Git, Power BI, PowerShell, LLM</div>
-                </div>
-
-                <div class="job-item">
-                    <div class="job-header">
-                        <span class="job-title">Desenvolvedor Sênior Power BI / Tabular</span>
-                        <span class="job-date">Out 2023 – Abr 2025</span>
-                    </div>
-                    <div class="job-company">Keyrus</div>
-                    <div class="job-location">São Paulo, Brasil</div>
-                    <ul>
-                        <li>Desenhei e implementei soluções de BI usando medidas DAX e modelos dimensionais para sistemas OLAP.</li>
-                        <li>Garanti a qualidade e a consistência dos dados validando pipelines de ETL e migrações.</li>
-                        <li>Gerenciei e mantive datasets do Power BI, incluindo controle de acesso e correção de bugs.</li>
-                    </ul>
-                    <div class="job-tools">Ferramentas: Azure, AWS, Azure Warehouse, SQL, Tabular Editor, Python, Git, Power BI</div>
-                </div>
-
-                <div class="job-item">
-                    <div class="job-header">
-                        <span class="job-title">Desenvolvedor Sênior Power BI</span>
-                        <span class="job-date">Out 2023 – Abr 2024</span>
-                    </div>
-                    <div class="job-company">Tata Consultancy Services</div>
-                    <div class="job-location">Barueri-SP, Brasil</div>
-                    <ul>
-                        <li>Desenvolvi dashboards de BI para stakeholders internos.</li>
-                        <li>Validei migrações de dados (Denodo → Athena) e construí modelos OLAP.</li>
-                        <li>Criei medidas DAX e mantive a integridade dos datasets.</li>
-                    </ul>
-                    <div class="job-tools">Ferramentas: Azure, AWS, SQL, Databricks, Python, Git, Power BI</div>
-                </div>
-
-                <div class="job-item">
-                    <div class="job-header">
-                        <span class="job-title">Consultor Sênior de BI (Freelance)</span>
-                        <span class="job-date">Mar 2023 – Jan 2024 & Mai 2020 – Nov 2021</span>
-                    </div>
-                    <div class="job-company">Autônomo</div>
-                    <div class="job-location">São Paulo-SP, Brasil</div>
-                    <ul>
-                        <li>Desenvolvi dashboards de BI e monitoramento de custos para projetos de P&D e construção civil.</li>
-                        <li>Desenhei data warehouses e pipelines de ETL; colaborei com equipes de UX para entregar dashboards de storytelling.</li>
-                    </ul>
-                    <div class="job-tools">Ferramentas: Azure, AWS, GCP, Data Factory, Power Apps, Databricks, Power BI, BigQuery</div>
-                </div>
-            </div>
-
-            <!-- DOWNLOAD SECTION -->
-            <div class="download-section">
-                <p style="margin-bottom: 1rem; color: #666; font-weight: 600;">Want the printable version? / Quer a versão para impressão?</p>
-                <a href="resume_en.pdf" class="btn" download>📄 Download PDF (EN)</a>
-                <a href="resume_pt.pdf" class="btn btn-outline" download>📄 Baixar PDF (PT)</a>
-            </div>
-        </main>
+<div class="container">
+    <div class="header">
+        <h1>Leandro Vieira Silva</h1>
+        <p>Data & Analytics Professional</p>
+        
+        <div class="lang-toggle">
+            <button class="lang-btn active" id="btn-en" onclick="setLang('en')">English</button>
+            <button class="lang-btn" id="btn-pt" onclick="setLang('pt')">Português</button>
+        </div>
     </div>
 
-    <script>
-        function setLang(lang) {
-            document.querySelectorAll('[data-lang]').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => el.classList.add('active'));
-            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-            document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
-            document.documentElement.lang = lang;
-        }
-    </script>
+    <div class="content">
+        <!-- English Content -->
+        <div id="content-en" data-lang="en" class="active">
+            <div class="section">
+                <h2>About Me</h2>
+                <p>Data professional specializing in Power BI, SQL, and process automation. Passionate about transforming raw data into actionable insights and building robust CI/CD pipelines for analytics projects.</p>
+            </div>
+            
+            <div class="pdf-container">
+                <div class="mobile-hint">📱 <strong>On Mobile?</strong> Embedded PDFs don't work well on phones. Please use the button below to view the full document.</div>
+                <a href="resume_en.pdf" class="download-btn" download>📄 Download English PDF</a>
+                <!-- Desktop users will see this preview below the button -->
+                <iframe src="resume_en.pdf" class="pdf-embed" title="CV Preview"></iframe>
+            </div>
+        </div>
+
+        <!-- Portuguese Content -->
+        <div id="content-pt" data-lang="pt">
+            <div class="section">
+                <h2>Sobre Mim</h2>
+                <p>Profissional de dados especializado em Power BI, SQL e automação de processos. Apaixonado por transformar dados brutos em insights acionáveis e construir pipelines robustos de CI/CD para projetos de análise.</p>
+            </div>
+            
+            <div class="pdf-container">
+                <div class="mobile-hint">📱 <strong>No Celular?</strong> Visualizadores de PDF embutidos falham em celulares. Por favor, use o botão abaixo para ver o documento completo.</div>
+                <a href="resume_pt.pdf" class="download-btn" download>📄 Baixar Currículo em PDF</a>
+                <iframe src="resume_pt.pdf" class="pdf-embed" title="Pré-visualização do CV"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setLang(lang) {
+        // Hide all language content
+        document.querySelectorAll('[data-lang]').forEach(el => el.classList.remove('active'));
+        // Show selected language content
+        document.getElementById('content-' + lang).classList.add('active');
+        
+        // Update button states
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+        
+        // Update HTML lang attribute for accessibility
+        document.documentElement.lang = lang;
+    }
+</script>
+
 </body>
 </html>
