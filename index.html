@@ -26,8 +26,6 @@
 
         /* Layout */
         .container {
-            display: grid;
-            grid-template-columns: 320px 1fr;
             max-width: 1100px;
             margin: 2rem auto;
             background: var(--white);
@@ -36,13 +34,18 @@
             overflow: hidden;
         }
 
-        /* Sidebar (Dark) */
-        .sidebar {
+        /* Info band (Dark, bottom) */
+        .info-band {
             background-color: var(--primary);
             color: var(--white);
-            padding: 2.5rem 2rem;
+            padding: 2.5rem 3rem;
         }
-        .sidebar h3 {
+        .info-band [data-lang].active {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 0.8fr;
+            gap: 2.5rem;
+        }
+        .info-band h3 {
             font-family: 'Roboto Slab', serif;
             font-size: 1.1rem;
             text-transform: uppercase;
@@ -50,21 +53,24 @@
             border-bottom: 2px solid var(--accent);
             padding-bottom: 0.5rem;
             margin-bottom: 1rem;
-            margin-top: 2rem;
         }
-        .sidebar h3:first-child { margin-top: 0; }
-        
+
+        /* Contact bar (header) */
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+        }
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 0.8rem;
+            gap: 0.5rem;
             font-size: 0.95rem;
-            word-break: break-all;
+            color: rgba(255,255,255,0.85);
         }
         .contact-item a { color: var(--white); text-decoration: none; transition: color 0.3s; }
         .contact-item a:hover { color: var(--accent); }
-        .contact-item svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+        .contact-item svg { width: 18px; height: 18px; fill: var(--accent); flex-shrink: 0; }
 
         .skill-tag {
             display: inline-block;
@@ -84,13 +90,15 @@
 
         /* Main Content */
         .main-content {
+            position: relative;
             padding: 3rem;
         }
         .lang-toggle {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: var(--bg-light);
+            z-index: 1;
+            background: rgba(255,255,255,0.12);
             border-radius: 20px;
             padding: 0.3rem;
             display: flex;
@@ -98,7 +106,7 @@
         .lang-toggle button {
             background: transparent;
             border: none;
-            color: var(--text-light);
+            color: rgba(255,255,255,0.75);
             padding: 0.4rem 1rem;
             cursor: pointer;
             border-radius: 15px;
@@ -107,22 +115,30 @@
             transition: all 0.3s;
         }
         .lang-toggle button.active {
-            background: var(--primary);
-            color: var(--white);
+            background: var(--white);
+            color: var(--primary);
         }
 
+        /* Header (Dark, top) */
+        .hero {
+            background-color: var(--primary);
+            color: var(--white);
+            margin: -3rem -3rem 2.5rem;
+            padding: 3rem;
+            border-bottom: 4px solid var(--accent);
+        }
         .header-name {
             font-family: 'Roboto Slab', serif;
             font-size: 2.8rem;
-            color: var(--primary);
+            color: var(--white);
             line-height: 1.1;
             margin-bottom: 0.5rem;
         }
         .header-tagline {
             font-size: 1.2rem;
-            color: var(--secondary);
+            color: #A9C1F5;
             font-weight: 400;
-            margin-bottom: 2rem;
+            margin-bottom: 0.8rem;
         }
 
         .section-title {
@@ -167,9 +183,7 @@
         }
 
         .download-section {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #eee;
+            padding: 2rem 3rem 2.5rem;
             text-align: center;
         }
         .btn {
@@ -197,181 +211,24 @@
 
         /* Mobile Responsive */
         @media (max-width: 850px) {
-            .container { grid-template-columns: 1fr; margin: 0; border-radius: 0; }
-            .sidebar { padding: 2rem 1.5rem; }
+            .container { margin: 0; border-radius: 0; }
+            .info-band { padding: 2rem 1.5rem; }
+            .info-band [data-lang].active { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .download-section { padding: 2rem 1.5rem; }
+            .btn { margin: 0.3rem; }
             .main-content { padding: 2rem 1.5rem; }
             .header-name { font-size: 2.2rem; }
-            .lang-toggle { position: static; margin-bottom: 1.5rem; justify-content: center; }
+            .hero { margin: -2rem -1.5rem 2rem; padding: 4rem 1.5rem 2rem; }
             .job-header { flex-direction: column; }
+        }
+        @media (max-width: 560px) {
+            .info-band [data-lang].active { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <!-- EN Sidebar -->
-            <div data-lang="en" class="active">
-                <h3>Contact</h3>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <a href="mailto:leandro797.ls@gmail.com">leandro797.ls@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                    <span>+55 11 97897 0961</span>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <span>São Paulo, Brazil</span>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    <a href="https://linkedin.com/in/leandro-vieira-silva-analytics" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    <a href="https://github.com/leandro-v-silva" target="_blank">GitHub</a>
-                </div>
-
-                <h3>Tech Stack</h3>
-                <div>
-                    <span class="skill-tag">Power BI</span>
-                    <span class="skill-tag">DAX</span>
-                    <span class="skill-tag">Power Query (M)</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Databricks</span>
-                    <span class="skill-tag">Snowflake</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">CI/CD</span>
-                    <span class="skill-tag">ETL/ELT</span>
-                    <span class="skill-tag">Claude</span>
-                    <span class="skill-tag">LLM</span>
-                    <span class="skill-tag">RAG</span>
-                    <span class="skill-tag">AI Agents</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Fabric</span>
-                    <span class="skill-tag">Tabular CLI</span>
-                    <span class="skill-tag">Shell</span>
-                    <span class="skill-tag">PowerShell</span>
-                    <span class="skill-tag">n8n</span>
-                </div>
-
-                <h3>Education</h3>
-                <div class="edu-item">
-                    <div class="edu-degree">Postgrad. Geoprocessing</div>
-                    <div class="edu-school">SENAC</div>
-                    <div class="edu-date">Aug 2026 – Present</div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-degree">B.Sc. Production Engineering</div>
-                    <div class="edu-school">USF</div>
-                    <div class="edu-date">2007 – 2013</div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-degree">Math Studies</div>
-                    <div class="edu-school">UNIVESP</div>
-                    <div class="edu-date">Aug 2025 – Present</div>
-                </div>
-
-                <h3>Courses</h3>
-                <div>
-                    <span class="skill-tag">Data Analyst with Python</span>
-                    <span class="skill-tag">Data Engineering with SQL</span>
-                    <span class="skill-tag">DA-100</span>
-                    <span class="skill-tag">Data Modeling</span>
-                    <span class="skill-tag">Data Literacy</span>
-                </div>
-
-                <h3>Languages</h3>
-                <div class="lang-item">Portuguese: Native</div>
-                <div class="lang-item">English: Advanced</div>
-                <div class="lang-item">French: Basic</div>
-            </div>
-
-            <!-- PT Sidebar -->
-            <div data-lang="pt">
-                <h3>Contato</h3>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <a href="mailto:leandro797.ls@gmail.com">leandro797.ls@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                    <span>+55 11 97897 0961</span>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <span>São Paulo, Brasil</span>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    <a href="https://linkedin.com/in/leandro-vieira-silva-analytics" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    <a href="https://github.com/leandro-v-silva" target="_blank">GitHub</a>
-                </div>
-
-                <h3>Tecnologias</h3>
-                <div>
-                    <span class="skill-tag">Power BI</span>
-                    <span class="skill-tag">DAX</span>
-                    <span class="skill-tag">Power Query (M)</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Databricks</span>
-                    <span class="skill-tag">Snowflake</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">CI/CD</span>
-                    <span class="skill-tag">ETL/ELT</span>
-                    <span class="skill-tag">Claude</span>
-                    <span class="skill-tag">LLM</span>
-                    <span class="skill-tag">RAG</span>
-                    <span class="skill-tag">Agentes de IA</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Fabric</span>
-                    <span class="skill-tag">Tabular CLI</span>
-                    <span class="skill-tag">Shell</span>
-                    <span class="skill-tag">PowerShell</span>
-                    <span class="skill-tag">n8n</span>
-                </div>
-
-                <h3>Formação</h3>
-                <div class="edu-item">
-                    <div class="edu-degree">Especialização em Geoprocessamento</div>
-                    <div class="edu-school">SENAC</div>
-                    <div class="edu-date">Ago 2026 – Presente</div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-degree">Engenharia de Produção</div>
-                    <div class="edu-school">USF</div>
-                    <div class="edu-date">2007 – 2013</div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-degree">Estudos em Matemática</div>
-                    <div class="edu-school">UNIVESP</div>
-                    <div class="edu-date">Ago 2025 – Presente</div>
-                </div>
-
-                <h3>Cursos</h3>
-                <div>
-                    <span class="skill-tag">Data Analyst with Python</span>
-                    <span class="skill-tag">Data Engineering with SQL</span>
-                    <span class="skill-tag">DA-100</span>
-                    <span class="skill-tag">Data Modeling</span>
-                    <span class="skill-tag">Data Literacy</span>
-                </div>
-
-                <h3>Idiomas</h3>
-                <div class="lang-item">Português: Nativo</div>
-                <div class="lang-item">Inglês: Avançado</div>
-                <div class="lang-item">Francês: Básico</div>
-            </div>
-        </aside>
-
         <!-- MAIN CONTENT -->
         <main class="main-content">
             <div class="lang-toggle">
@@ -381,8 +238,32 @@
 
             <!-- ENGLISH MAIN -->
             <div data-lang="en" class="active">
-                <h1 class="header-name">Leandro Vieira Silva</h1>
-                <p class="header-tagline">Seeking: DW/BI Developer | Analytics Engineer</p>
+                <header class="hero">
+                    <h1 class="header-name">Leandro Vieira Silva</h1>
+                    <p class="header-tagline">Seeking: DW/BI Developer | Analytics Engineer</p>
+                    <div class="contact-bar">
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <a href="mailto:leandro797.ls@gmail.com">leandro797.ls@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>+55 11 97897 0961</span>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>São Paulo, Brazil</span>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            <a href="https://linkedin.com/in/leandro-vieira-silva-analytics" target="_blank">LinkedIn</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            <a href="https://github.com/leandro-v-silva" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </header>
 
                 <h2 class="section-title">About Me</h2>
                 <p class="about-text">Production Engineer with solid experience in Business Intelligence, data modeling, and dashboard development. Currently pursuing a Postgraduate Specialization in Geoprocessing.</p>
@@ -509,8 +390,32 @@
 
             <!-- PORTUGUESE MAIN -->
             <div data-lang="pt">
-                <h1 class="header-name">Leandro Vieira Silva</h1>
-                <p class="header-tagline">Buscando: Desenvolvedor DW/BI | Analytics Engineer</p>
+                <header class="hero">
+                    <h1 class="header-name">Leandro Vieira Silva</h1>
+                    <p class="header-tagline">Buscando: Desenvolvedor DW/BI | Analytics Engineer</p>
+                    <div class="contact-bar">
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <a href="mailto:leandro797.ls@gmail.com">leandro797.ls@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>+55 11 97897 0961</span>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>São Paulo, Brasil</span>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            <a href="https://linkedin.com/in/leandro-vieira-silva-analytics" target="_blank">LinkedIn</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            <a href="https://github.com/leandro-v-silva" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </header>
 
                 <h2 class="section-title">Sobre Mim</h2>
                 <p class="about-text">Engenheiro de Produção com sólida experiência em Business Intelligence, modelagem de dados e desenvolvimento de dashboards. Atualmente cursando Especialização em Geoprocessamento.</p>
@@ -634,14 +539,149 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- DOWNLOAD SECTION -->
-            <div class="download-section">
-                <p style="margin-bottom: 1rem; color: #666; font-weight: 600;">Want the printable version? / Quer a versão para impressão?</p>
-                <a href="resume_en.pdf" class="btn" download>📄 Download PDF (EN)</a>
-                <a href="resume_pt.pdf" class="btn btn-outline" download>📄 Baixar PDF (PT)</a>
-            </div>
         </main>
+
+        <!-- INFO BAND -->
+        <aside class="info-band">
+            <!-- EN Band -->
+            <div data-lang="en" class="active">
+                <div class="band-col">
+                    <h3>Tech Stack</h3>
+                    <div>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">DAX</span>
+                        <span class="skill-tag">Power Query (M)</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Databricks</span>
+                        <span class="skill-tag">Snowflake</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">ETL/ELT</span>
+                        <span class="skill-tag">Claude</span>
+                        <span class="skill-tag">LLM</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">AI Agents</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Fabric</span>
+                        <span class="skill-tag">Tabular CLI</span>
+                        <span class="skill-tag">Shell</span>
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">n8n</span>
+                    </div>
+                </div>
+
+                <div class="band-col">
+                    <h3>Education</h3>
+                    <div class="edu-item">
+                        <div class="edu-degree">Postgrad. Geoprocessing</div>
+                        <div class="edu-school">SENAC</div>
+                        <div class="edu-date">Aug 2026 – Present</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-degree">B.Sc. Production Engineering</div>
+                        <div class="edu-school">USF</div>
+                        <div class="edu-date">2007 – 2013</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-degree">Math Studies</div>
+                        <div class="edu-school">UNIVESP</div>
+                        <div class="edu-date">Aug 2025 – Present</div>
+                    </div>
+                </div>
+
+                <div class="band-col">
+                    <h3>Courses</h3>
+                    <div>
+                        <span class="skill-tag">Data Analyst with Python</span>
+                        <span class="skill-tag">Data Engineering with SQL</span>
+                        <span class="skill-tag">DA-100</span>
+                        <span class="skill-tag">Data Modeling</span>
+                        <span class="skill-tag">Data Literacy</span>
+                    </div>
+                </div>
+
+                <div class="band-col">
+                    <h3>Languages</h3>
+                    <div class="lang-item">Portuguese: Native</div>
+                    <div class="lang-item">English: Advanced</div>
+                    <div class="lang-item">French: Basic</div>
+                </div>
+            </div>
+
+            <!-- PT Band -->
+            <div data-lang="pt">
+                <div class="band-col">
+                    <h3>Tecnologias</h3>
+                    <div>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">DAX</span>
+                        <span class="skill-tag">Power Query (M)</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Databricks</span>
+                        <span class="skill-tag">Snowflake</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">ETL/ELT</span>
+                        <span class="skill-tag">Claude</span>
+                        <span class="skill-tag">LLM</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">Agentes de IA</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Fabric</span>
+                        <span class="skill-tag">Tabular CLI</span>
+                        <span class="skill-tag">Shell</span>
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">n8n</span>
+                    </div>
+                </div>
+
+                <div class="band-col">
+                    <h3>Formação</h3>
+                    <div class="edu-item">
+                        <div class="edu-degree">Especialização em Geoprocessamento</div>
+                        <div class="edu-school">SENAC</div>
+                        <div class="edu-date">Ago 2026 – Presente</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-degree">Engenharia de Produção</div>
+                        <div class="edu-school">USF</div>
+                        <div class="edu-date">2007 – 2013</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-degree">Estudos em Matemática</div>
+                        <div class="edu-school">UNIVESP</div>
+                        <div class="edu-date">Ago 2025 – Presente</div>
+                    </div>
+                </div>
+
+                <div class="band-col">
+                    <h3>Cursos</h3>
+                    <div>
+                        <span class="skill-tag">Data Analyst with Python</span>
+                        <span class="skill-tag">Data Engineering with SQL</span>
+                        <span class="skill-tag">DA-100</span>
+                        <span class="skill-tag">Data Modeling</span>
+                        <span class="skill-tag">Data Literacy</span>
+                    </div>
+                </div>
+
+                <div class="band-col">
+                    <h3>Idiomas</h3>
+                    <div class="lang-item">Português: Nativo</div>
+                    <div class="lang-item">Inglês: Avançado</div>
+                    <div class="lang-item">Francês: Básico</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- DOWNLOAD SECTION -->
+        <footer class="download-section">
+            <p style="margin-bottom: 1rem; color: #666; font-weight: 600;">Want the printable version? / Quer a versão para impressão?</p>
+            <a href="resume_en.pdf" class="btn" download>📄 Download PDF (EN)</a>
+            <a href="resume_pt.pdf" class="btn btn-outline" download>📄 Baixar PDF (PT)</a>
+        </footer>
     </div>
 
     <script>
